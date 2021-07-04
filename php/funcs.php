@@ -13,19 +13,6 @@ function db_conn(){
       exit('DBConnectError:'.$e->getMessage());
       }
 }
-//sakura
-// function db_conn(){
-//     try {
-//         $db_name = "mil1st08_08ik";
-//         $db_id   = "mil1st08"; 
-//         $db_pw   = "kurata_1101"; 
-//         $db_host = "mysql57.mil1st08.sakura.ne.jp"; 
-//         $pdo = new PDO('mysql:dbname=' . $db_name . ';charset=utf8;host=' . $db_host, $db_id, $db_pw);
-//         return $pdo;
-//     } catch (PDOException $e) {
-//       exit('DBConnectError:'.$e->getMessage());
-//       }
-// }
 
 //SQLエラー関数：sql_error($stmt)
 function sql_error($stmt){
