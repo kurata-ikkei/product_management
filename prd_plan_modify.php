@@ -19,15 +19,28 @@ $stmt = $pdo->prepare("SELECT * FROM product WHERE id=:id;");
 $stmt->bindValue(':id',$id,PDO::PARAM_INT);
 $status = $stmt->execute();
 
-//4．データ表示
+
 $view = "";
 if ($status == false) {
     sql_error($status);
 } else {
     $result = $stmt->fetch();
+
+    $prod_no = $result["item_no"];
+    $stmt2 = $pdo->prepare("SELECT * FROM img_table WHERE prod_no=:prod_no");
+    $stmt2->bindValue(':prod_no',$prod_no,PDO::PARAM_STR);
+    $status = $stmt2->execute();
+
+    $image="";
+    if($status==false) {
+        sql_error();
+    }else{
+        while( $r = $stmt2->fetch(PDO::FETCH_ASSOC)){ 
+        $image .= '<p><img src="img/'.$r["img_path"].'"></p>';
+  }
+
 }
-
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +58,26 @@ if ($status == false) {
     <p>user:  <?= $user_name.'('.$role_flg.')'?></p>
     <a href="./php/logout.php"><p>Log OUT</p></a>
 </header>
-<a href="./main.php">HOMEに戻る</a>
+<a href="./main.php">HOMEに戻る</a><br>
+<a href="./prd_plan.php">商品一覧に戻る</a>
 <div class="prd_reg">
     <h3>商品情報編集</h3>
+    <div class="wrapper">
+    <div class="left">
+        <p>商品画像を追加する</p>
+        <form method="POST" action="./php/img_upload.php"  enctype="multipart/form-data">
+            <input type="file" name="image">
+            <input type="hidden" name="prod_no" value="<?= $result['item_no'] ?>">
+            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+            <input type="submit" value="画像を追加">
+        </form>
+        <div>
+        <p>保存済の画像</p>
+        <div class="img_area"></div>
+        <?=$image?>
+        </div>
+    </div>
+    <div class="right">
     <form method="POST" action="./php/modify_item.php">
         <div>
             <fieldset>
@@ -95,6 +125,10 @@ if ($status == false) {
                 <input type="hidden" name="id" value="<?= $result['id'] ?>">
                 <input type="submit" value="編集">
             </fieldset>
+            </div>
         </div>
     </form>
+
+
+    </div>
 </div>
