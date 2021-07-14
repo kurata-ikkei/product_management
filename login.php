@@ -44,7 +44,7 @@
 
 <div class="nonuser_area">
 <h2>ログインせず商品情報を閲覧する場合はこちら<br>（一部閲覧できない情報もございます）</h2>
-    <a href="./select.php">商品情報を確認する</a>
+    <a href="./select2.php">商品情報を確認する</a>
 </div>    
 </body>
 </html>
