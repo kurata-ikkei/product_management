@@ -33,6 +33,7 @@ if($status==false) {
     <title>商品一覧</title>
 </head>
 <body>
+<a href="./login.php">管理者向けログイン画面に戻る</a>
     <h1>ECサイト（テスト）</h1>
     <div class="navigation">
         <h2>会員登録（未実装）</h2>

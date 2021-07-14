@@ -39,9 +39,12 @@ if ($status == false) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>商品詳細ページ</title>
 </head>
 <body>
+<a href="./select2.php"><p>商品一覧に戻る</p></a>
 <h1>商品詳細ページ</h1>
 <div class="wrapper">
     <div class="image">
@@ -60,7 +63,59 @@ if ($status == false) {
             <option value="5">5</option>
         </select>
         <button>カートに追加（見た目だけ）</button>
+        <div class="chart">
+            <p>とりあえず、見た目の構成だけでデータはベタ打ち</p>
+            <canvas id="myRadarChart"></canvas>
+        </div>
     </div>
 </div>
+
+<script>
+var ctx = document.getElementById("myRadarChart");
+var myRadarChart = new Chart(ctx, {
+  //グラフの種類
+  type: 'radar',
+  //データの設定
+  data: {
+      //データ項目のラベル
+      labels: ["重さ", "厚さ", "吸水性", "ビジネス", "細さ"],
+      //データセット
+      datasets: [
+          {
+              label: "こちらの商品",
+              //背景色
+              backgroundColor: "rgba(200,112,126,0.5)",
+              //枠線の色
+              borderColor: "rgba(200,112,126,1)",
+              //結合点の背景色
+              pointBackgroundColor: "rgba(200,112,126,1)",
+              //結合点の枠線の色
+              pointBorderColor: "#fff",
+              //結合点の背景色（ホバ時）
+              pointHoverBackgroundColor: "#fff",
+              //結合点の枠線の色（ホバー時）
+              pointHoverBorderColor: "rgba(200,112,126,1)",
+              //結合点より外でマウスホバーを認識する範囲（ピクセル単位）
+              hitRadius: 5,
+              //グラフのデータ
+              data: [3,3,2,5,3]
+          }
+      ]
+  },
+ options: {
+    // レスポンシブ指定
+    responsive: true,
+    scale: {
+      ticks: {
+        // 最小値の値を0指定
+        beginAtZero:true,
+        min: 0,
+        // 最大値を指定
+        max: 5,
+      }
+    }
+  }
+});
+</script>
 </body>
 </html>

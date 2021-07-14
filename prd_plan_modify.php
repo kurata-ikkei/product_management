@@ -67,6 +67,10 @@ if ($status == false) {
         <p>商品画像を追加する</p>
         <form method="POST" action="./php/img_upload.php"  enctype="multipart/form-data">
             <input type="file" name="image">
+            <select name="main_flg">
+                <option value="1">メイン画像</option>
+                <option value="0">サブ画像</option>
+            </select>
             <input type="hidden" name="prod_no" value="<?= $result['item_no'] ?>">
             <input type="hidden" name="id" value="<?= $result['id'] ?>">
             <input type="submit" value="画像を追加">
